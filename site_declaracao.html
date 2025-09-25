@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Uma Surpresa Para Você</title>
+  <style>
+    :root{--bg1:#ffffff;--bg2:#f9fafb;--accent:#f472b6;--glass:rgba(255,255,255,0.95)}
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#111;background:linear-gradient(135deg,var(--bg1),var(--bg2));}
+    .container{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px}
+    .card{width:100%;max-width:980px;background:linear-gradient(180deg,rgba(0,0,0,0.03),rgba(0,0,0,0.02));border-radius:18px;padding:28px;box-shadow:0 10px 30px rgba(0,0,0,0.1);backdrop-filter:blur(6px);position:relative;overflow:hidden}
+    header{display:flex;gap:18px;align-items:center}
+    .logo{width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff6, transparent);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent);font-size:28px}
+    h1{margin:0;font-size:30px;letter-spacing:-0.5px}
+    p.lead{margin:6px 0 18px;color:#444}
+    .actions{display:flex;gap:10px;flex-wrap:wrap}
+    button{background:linear-gradient(90deg,var(--accent),#7c3aed);border:0;padding:12px 18px;border-radius:10px;color:#fff;font-weight:600;cursor:pointer;box-shadow:0 6px 18px rgba(124,58,237,0.18)}
+    button.ghost{background:transparent;border:1px solid rgba(0,0,0,0.1);box-shadow:none;color:#111}
+    .grid{display:grid;grid-template-columns:1fr 420px;gap:22px}
+    .text-box{padding:16px;background:var(--glass);border-radius:12px;color:#111}
+    .video-box{border-radius:12px;overflow:hidden;background:#000;display:flex;flex-direction:column}
+    .video-box img{width:100%;height:260px;object-fit:cover;border-radius:12px;}
+    .video-list{display:flex;gap:8px;padding:10px;overflow-x:auto}
+    .thumb{min-width:120px;height:68px;border-radius:8px;overflow:hidden;cursor:pointer;border:2px solid transparent}
+    .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+    .thumb.active{border-color:var(--accent)}
+    footer{display:flex;justify-content:space-between;align-items:center;padding-top:10px;color:#555}
+    .modal{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.6);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+    .modal.open{opacity:1;pointer-events:auto}
+    .panel{width:92%;max-width:760px;background:rgba(255,255,255,0.95);padding:22px;border-radius:14px;box-shadow:0 20px 40px rgba(0,0,0,0.2);position:relative;color:#111}
+    .typed{font-size:18px;line-height:1.6;color:#111;min-height:120px;white-space:pre-line}
+    .close{position:absolute;right:12px;top:12px;background:transparent;border:0;color:#111;font-size:22px;cursor:pointer}
+    @media(max-width:880px){.grid{grid-template-columns:1fr;}.video-box img{height:200px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <div class="logo">♥</div>
+        <div>
+          <h1>Uma surpresa só pra você</h1>
+          <p class="lead">Entre, relaxe e deixe seu coração ler o que preparei com carinho.</p>
+          <div class="actions">
+            <button id="openDecl">Abrir declaração</button>
+          </div>
+        </div>
+      </header>
+
+      <main style="margin-top:20px">
+        <div class="grid">
+          <section class="text-box">
+            <h2 style="margin-top:0">Minha declaração</h2>
+            <p style="margin:0 0 12px 0">quando você clicar em <strong>Abrir declaração</strong>, a mensagem aparecerá em um modo especial.</p>
+            <div style="margin-top:14px;color:#7c3aed">Eu te amo meu amor.</div>
+          </section>
+
+          <aside class="video-box">
+            <img id="mainVideo" src="https://www.dropbox.com/scl/fi/0jtn60p3mbhs4vgcp68eq/IMG_1544.jpg?rlkey=hc8mspytvebbfogkl9ax6n6a3&raw=1" alt="foto principal">
+            <div class="video-list" id="videoList">
+              <div class="thumb active" data-src="https://www.dropbox.com/scl/fi/0jtn60p3mbhs4vgcp68eq/IMG_1544.jpg?rlkey=hc8mspytvebbfogkl9ax6n6a3&raw=1">
+                <img src="https://www.dropbox.com/scl/fi/0jtn60p3mbhs4vgcp68eq/IMG_1544.jpg?rlkey=hc8mspytvebbfogkl9ax6n6a3&raw=1" alt="foto1">
+              </div>
+              <div class="thumb" data-src="https://www.dropbox.com/scl/fi/6faahc9sywa8m30hx7pej/IMG_1064.jpg?rlkey=mex74g2lhqiqbna285rg76yt2&raw=1">
+                <img src="https://www.dropbox.com/scl/fi/6faahc9sywa8m30hx7pej/IMG_1064.jpg?rlkey=mex74g2lhqiqbna285rg76yt2&raw=1" alt="foto2">
+              </div>
+              <div class="thumb" data-src="https://www.dropbox.com/scl/fi/gu98woxgfgljd5qu0ttir/IMG_0120.jpg?rlkey=z241cged3yytl18fupxdwxurb&raw=1">
+                <img src="https://www.dropbox.com/scl/fi/gu98woxgfgljd5qu0ttir/IMG_0120.jpg?rlkey=z241cged3yytl18fupxdwxurb&raw=1" alt="foto3">
+              </div>
+            </div>
+          </aside>
+        </div>
+
+        <!-- Trilha sonora -->
+        <div class="actions" style="margin-top:12px; display:flex; gap:10px;">
+          <button class="music-btn" data-src="https://www.dropbox.com/scl/fi/j6506aga9b9yrx3gtz9hc/Alian-a-Tribalistas-lyrics-letra-eodudzinska.mp3?rlkey=yfbw9ad0662mm2jde3zvf485i&st=fyyghyqg&dl=1">Trilha 1</button>
+          <button class="music-btn" data-src="https://www.dropbox.com/scl/fi/apk5tjs8dnmitsqilu5s3/ANAVIT-RIA-Lenine-Lisboa-visualizer-2.mp3?rlkey=0vffw4ktspky7w0ccjn4h96jt&st=1eol5lwv&dl=1">Trilha 2</button>
+          <button class="music-btn" data-src="https://www.dropbox.com/scl/fi/9h8u44ym9wqsmru1po2z6/Grupo-Menos-Mais-Deixa-tudo-como-t-Letra.mp3?rlkey=sthdtubj5dbm1akw2i5ioadx6&st=7rwji0rr&dl=1">Trilha 3</button>
+        </div>
+        <audio id="bgMusic" loop></audio>
+
+      </main>
+
+      <footer>
+        <small>Feito com carinho por Erick demetrio de almeida cocoli, Seu amor <3.</small>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="panel">
+      <button class="close" id="closeModal">✕</button>
+      <div class="typed" id="typedText">
+        Meu amor,
+
+Desde que estamos juntos, minha vida mudou completamente. E eu quero que você saiba, de verdade, que eu escolho você todos os dias, não importa o que aconteça. Sei que às vezes podem surgir inseguranças, dúvidas ou medos — é normal. Mas quero que você se sinta segura comigo, porque eu estou aqui, inteiro, por você e para você.
+
+Quero ser mais do que alguém que anda ao seu lado. Quero ser seu abrigo quando o mundo pesar, seu apoio quando tudo ficar difícil, sua companhia nas risadas e até nos dias mais chatos. Quero que você saiba que, mesmo nos dias complicados, você nunca estará sozinha — eu estarei sempre com você, de coração e de verdade.
+
+Você é minha paz, minha alegria e meu porto seguro. Cada sorriso seu me dá força, cada abraço me lembra do quanto a vida é melhor ao seu lado. Eu quero construir nosso futuro juntos, sem pressa, passo a passo, com cuidado, com carinho e com muito amor.
+
+Eu sei que não sou perfeito, mas prometo me esforçar todos os dias para ser alguém que você possa confiar, apoiar e amar sem medo. Quero ouvir você, respeitar você, cuidar de você e estar presente em cada detalhe da sua vida. Quero ser aquela pessoa que você sabe que pode contar sempre, para tudo.
+
+Olho para o futuro e só consigo te imaginar lá, comigo, rindo, vivendo, crescendo juntos. Não importa o que apareça, eu quero estar do seu lado. Quero que você sinta que pode se apoiar em mim, se abrir comigo, e que eu nunca vou te deixar sozinha.
+
+Você é minha prioridade. Você é minha vida. E eu vou passar cada dia mostrando que esse amor é real, que você pode confiar em mim e que juntos podemos enfrentar qualquer coisa.
+
+Eu te amo demais. E quero que você nunca duvide disso.
+      </div>
+      <div style="margin-top:12px;display:flex;gap:10px;justify-content:flex-end">
+        <button id="closeBtn" class="ghost">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const openDecl = document.getElementById('openDecl');
+    const closeModal = document.getElementById('closeModal');
+    const typedTextEl = document.getElementById('typedText');
+    const videoList = document.getElementById('videoList');
+    const mainVideo = document.getElementById('mainVideo');
+    const bgMusic = document.getElementById('bgMusic');
+    const musicBtns = document.querySelectorAll('.music-btn');
+
+    function typeWriter(element, speed = 18){
+      const full = element.textContent.trim();
+      element.textContent = '';
+      let i = 0;
+      function step(){
+        if(i <= full.length){
+          element.textContent = full.slice(0,i);
+          i++;
+          requestAnimationFrame(()=>setTimeout(step, speed));
+        }
+      }
+      step();
+    }
+
+    openDecl.addEventListener('click', ()=>{
+      modal.classList.add('open');
+      typeWriter(typedTextEl, 18);
+    });
+
+    function closeAll(){ 
+      modal.classList.remove('open'); 
+      typedTextEl.textContent = typedTextEl.textContent;
+    }
+    closeModal.addEventListener('click', closeAll);
+    document.getElementById('closeBtn').addEventListener('click', closeAll);
+
+    videoList.addEventListener('click', (e)=>{
+      const t = e.target.closest('.thumb'); 
+      if(!t) return;
+      videoList.querySelectorAll('.thumb').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      mainVideo.src = t.dataset.src;
+    });
+
+    musicBtns.forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const src = btn.getAttribute('data-src');
+        if(bgMusic.src !== src){
+          bgMusic.pause();
+          bgMusic.src = src;
+          bgMusic.play().catch(()=>alert('Autoplay bloqueado: clique no botão para iniciar.'));
+        } else {
+          if(bgMusic.paused) bgMusic.play();
+          else bgMusic.pause();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
